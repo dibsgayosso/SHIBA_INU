@@ -282,3 +282,58 @@ textarea {
     padding: 0.65rem 0.8rem;
   }
 }
+
+.hidden {
+  display: none;
+}
+
+.admin-login-trigger {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+
+.modal[aria-hidden='true'] {
+  display: none;
+}
+
+.modal-content {
+  width: min(420px, 92%);
+  background: #fff;
+  border-radius: 0.9rem;
+  padding: 1.25rem;
+}
+
+.login-form {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.login-message {
+  min-height: 1.2rem;
+  margin: 0;
+  color: #a23017;
+}
+
+.admin-tools {
+  display: flex;
+  gap: 0.5rem;
+}

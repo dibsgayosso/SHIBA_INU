@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'shibaLandingConfig';
+const AUTH_TOKEN_KEY = 'shibaAdminToken';
 
 const defaultConfig = {
   texts: {},
@@ -6,11 +7,7 @@ const defaultConfig = {
     heroBackgroundImage:
       'https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&w=1500&q=80',
   },
-  colors: {
-    '--primary': '#cb4f26',
-    '--primary-dark': '#9a3918',
-    '--bg': '#fff8f3',
-  },
+  colors: { '--primary': '#cb4f26', '--primary-dark': '#9a3918', '--bg': '#fff8f3' },
   whatsapp: {
     number: '15550000000',
     message: 'Hola, quiero información sobre cachorros Shiba Inu',
@@ -45,30 +42,26 @@ const mergeConfig = (stored) => ({
 
 let config = mergeConfig(safeParse(localStorage.getItem(STORAGE_KEY)));
 
-const saveConfig = () => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
-};
+const saveConfig = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_KEY) || '';
+const setAuthToken = (token) => localStorage.setItem(AUTH_TOKEN_KEY, token);
+const clearAuthToken = () => localStorage.removeItem(AUTH_TOKEN_KEY);
 
 const applyTexts = () => {
   document.querySelectorAll('[data-edit-text]').forEach((node) => {
     const key = node.dataset.editText;
-    if (config.texts[key]) {
-      node.innerHTML = config.texts[key];
-    }
+    if (config.texts[key]) node.innerHTML = config.texts[key];
   });
 };
 
 const applyImages = () => {
-  const hero = document.getElementById('hero');
   if (config.images.heroBackgroundImage) {
-    hero.style.setProperty('--hero-bg-image', `url('${config.images.heroBackgroundImage}')`);
+    document.getElementById('hero').style.setProperty('--hero-bg-image', `url('${config.images.heroBackgroundImage}')`);
   }
 
   document.querySelectorAll('[data-edit-image]').forEach((img) => {
     const key = img.dataset.editImage;
-    if (config.images[key]) {
-      img.src = config.images[key];
-    }
+    if (config.images[key]) img.src = config.images[key];
   });
 };
 
@@ -79,29 +72,22 @@ const applyColors = () => {
 };
 
 const applyWhatsApp = () => {
-  const button = document.getElementById('whatsappFloatingButton');
-  const text = document.getElementById('whatsappFloatingText');
   const number = (config.whatsapp.number || '').replace(/\D/g, '');
   const message = encodeURIComponent(config.whatsapp.message || '');
-  button.href = `https://wa.me/${number}?text=${message}`;
-  text.textContent = config.whatsapp.buttonText || 'WhatsApp';
+  document.getElementById('whatsappFloatingButton').href = `https://wa.me/${number}?text=${message}`;
+  document.getElementById('whatsappFloatingText').textContent = config.whatsapp.buttonText || 'WhatsApp';
 };
 
 const applySeo = () => {
-  const title = config.seo.title || defaultConfig.seo.title;
-  const description = config.seo.description || defaultConfig.seo.description;
-  const keywords = config.seo.keywords || defaultConfig.seo.keywords;
-  const ogImage = config.seo.ogImage || defaultConfig.seo.ogImage;
-  const canonical = config.seo.canonical || defaultConfig.seo.canonical;
-
-  document.title = title;
-  document.getElementById('seoTitle').textContent = title;
-  document.getElementById('seoDescription').setAttribute('content', description);
-  document.getElementById('seoKeywords').setAttribute('content', keywords);
-  document.getElementById('seoOgTitle').setAttribute('content', title);
-  document.getElementById('seoOgDescription').setAttribute('content', description);
-  document.getElementById('seoOgImage').setAttribute('content', ogImage);
-  document.getElementById('seoCanonical').setAttribute('href', canonical);
+  const seo = { ...defaultConfig.seo, ...config.seo };
+  document.title = seo.title;
+  document.getElementById('seoTitle').textContent = seo.title;
+  document.getElementById('seoDescription').setAttribute('content', seo.description);
+  document.getElementById('seoKeywords').setAttribute('content', seo.keywords);
+  document.getElementById('seoOgTitle').setAttribute('content', seo.title);
+  document.getElementById('seoOgDescription').setAttribute('content', seo.description);
+  document.getElementById('seoOgImage').setAttribute('content', seo.ogImage);
+  document.getElementById('seoCanonical').setAttribute('href', seo.canonical);
 };
 
 const syncAdminInputs = () => {
@@ -113,29 +99,26 @@ const syncAdminInputs = () => {
 
   document.querySelectorAll('[data-admin-image]').forEach((field) => {
     const key = field.dataset.adminImage;
-    if (key === 'heroBackgroundImage') {
-      field.value = config.images[key] || defaultConfig.images.heroBackgroundImage;
-      return;
-    }
-
     const target = document.querySelector(`[data-edit-image="${key}"]`);
-    field.value = config.images[key] || target?.src || '';
+    field.value = config.images[key] || target?.src || defaultConfig.images[key] || '';
   });
 
   document.querySelectorAll('[data-admin-color]').forEach((field) => {
-    const key = field.dataset.adminColor;
-    field.value = config.colors[key] || defaultConfig.colors[key];
+    field.value = config.colors[field.dataset.adminColor] || defaultConfig.colors[field.dataset.adminColor];
   });
 
   document.querySelectorAll('[data-admin-whatsapp]').forEach((field) => {
-    const key = field.dataset.adminWhatsapp;
-    field.value = config.whatsapp[key] || defaultConfig.whatsapp[key] || '';
+    field.value = config.whatsapp[field.dataset.adminWhatsapp] || defaultConfig.whatsapp[field.dataset.adminWhatsapp];
   });
 
   document.querySelectorAll('[data-admin-seo]').forEach((field) => {
-    const key = field.dataset.adminSeo;
-    field.value = config.seo[key] || defaultConfig.seo[key] || '';
+    field.value = config.seo[field.dataset.adminSeo] || defaultConfig.seo[field.dataset.adminSeo];
   });
+};
+
+const setAdminVisible = (visible) => {
+  document.getElementById('adminPanel').classList.toggle('hidden', !visible);
+  document.getElementById('openLogin').classList.toggle('hidden', visible);
 };
 
 const setupAdminPanel = () => {
@@ -144,9 +127,7 @@ const setupAdminPanel = () => {
       const key = event.target.dataset.adminText;
       const target = document.querySelector(`[data-edit-text="${key}"]`);
       config.texts[key] = event.target.value;
-      if (target) {
-        target.innerHTML = event.target.value;
-      }
+      if (target) target.innerHTML = event.target.value;
       saveConfig();
     });
   });
@@ -154,35 +135,24 @@ const setupAdminPanel = () => {
   document.querySelectorAll('[data-admin-image]').forEach((field) => {
     field.addEventListener('change', (event) => {
       const key = event.target.dataset.adminImage;
-      const url = event.target.value.trim();
-      config.images[key] = url;
-
-      if (key === 'heroBackgroundImage') {
-        document.getElementById('hero').style.setProperty('--hero-bg-image', `url('${url}')`);
-      } else {
-        const target = document.querySelector(`[data-edit-image="${key}"]`);
-        if (target && url) {
-          target.src = url;
-        }
-      }
-
+      config.images[key] = event.target.value.trim();
+      applyImages();
       saveConfig();
     });
   });
 
   document.querySelectorAll('[data-admin-color]').forEach((field) => {
     field.addEventListener('input', (event) => {
-      const variable = event.target.dataset.adminColor;
-      config.colors[variable] = event.target.value;
-      document.documentElement.style.setProperty(variable, event.target.value);
+      const key = event.target.dataset.adminColor;
+      config.colors[key] = event.target.value;
+      applyColors();
       saveConfig();
     });
   });
 
   document.querySelectorAll('[data-admin-whatsapp]').forEach((field) => {
     field.addEventListener('input', (event) => {
-      const key = event.target.dataset.adminWhatsapp;
-      config.whatsapp[key] = event.target.value;
+      config.whatsapp[event.target.dataset.adminWhatsapp] = event.target.value;
       applyWhatsApp();
       saveConfig();
     });
@@ -190,8 +160,7 @@ const setupAdminPanel = () => {
 
   document.querySelectorAll('[data-admin-seo]').forEach((field) => {
     field.addEventListener('input', (event) => {
-      const key = event.target.dataset.adminSeo;
-      config.seo[key] = event.target.value;
+      config.seo[event.target.dataset.adminSeo] = event.target.value;
       applySeo();
       saveConfig();
     });
@@ -224,10 +193,70 @@ const setupAdminPanel = () => {
   });
 };
 
-applyTexts();
-applyImages();
-applyColors();
-applyWhatsApp();
-applySeo();
-syncAdminInputs();
-setupAdminPanel();
+const openModal = () => document.getElementById('adminLoginModal').setAttribute('aria-hidden', 'false');
+const closeModal = () => document.getElementById('adminLoginModal').setAttribute('aria-hidden', 'true');
+
+const checkSession = async () => {
+  const token = getAuthToken();
+  if (!token) return false;
+
+  const response = await fetch('/api/session', { headers: { Authorization: `Bearer ${token}` } });
+  return response.ok;
+};
+
+const setupAuth = () => {
+  const loginMessage = document.getElementById('loginMessage');
+
+  document.getElementById('openLogin').addEventListener('click', openModal);
+
+  document.getElementById('adminLoginModal').addEventListener('click', (event) => {
+    if (event.target.id === 'adminLoginModal') closeModal();
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    loginMessage.textContent = '';
+
+    const username = document.getElementById('loginUser').value;
+    const password = document.getElementById('loginPassword').value;
+
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      loginMessage.textContent = data.message || 'No fue posible iniciar sesión.';
+      return;
+    }
+
+    setAuthToken(data.token);
+    closeModal();
+    setAdminVisible(true);
+  });
+
+  document.getElementById('logoutAdmin').addEventListener('click', async () => {
+    const token = getAuthToken();
+    if (token) {
+      await fetch('/api/logout', { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+    }
+    clearAuthToken();
+    setAdminVisible(false);
+  });
+};
+
+const boot = async () => {
+  applyTexts();
+  applyImages();
+  applyColors();
+  applyWhatsApp();
+  applySeo();
+  syncAdminInputs();
+  setupAdminPanel();
+  setupAuth();
+  setAdminVisible(await checkSession());
+};
+
+boot();

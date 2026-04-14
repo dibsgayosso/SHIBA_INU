@@ -1,15 +1,32 @@
 # SHIBA_INU
 
-Landing page de venta de cachorros Shiba Inu con enfoque en camadas de padres importados.
+Landing page de venta de cachorros Shiba Inu con panel administrador visual, login y configuración de SEO/WhatsApp.
 
 ## Archivos
-- `index.html`: estructura principal de la página, botón flotante de WhatsApp y panel administrador.
-- `styles.css`: estilos de la landing page, del panel y del botón de WhatsApp.
-- `script.js`: lógica del panel para editar textos, imágenes, colores, SEO y WhatsApp.
+- `index.html`: landing + modal de login + panel administrador.
+- `styles.css`: estilos del sitio, panel, modal y botón flotante de WhatsApp.
+- `script.js`: lógica de edición visual, persistencia local y autenticación del panel.
+- `server.js`: API de login/logout/sesión y servidor estático.
+- `db/init.sql`: esquema SQLite de usuarios administradores.
 
-## Uso
-1. Abre `index.html` en tu navegador.
-2. Usa el **Panel Administrador** para editar contenido visualmente.
-3. Configura la sección **SEO** (title, description, keywords, canonical y OG image).
-4. Configura la sección **WhatsApp** (número, mensaje y texto del botón).
-5. Los cambios quedan guardados en `localStorage` del navegador.
+## Base de datos y login de administrador
+1. Instala dependencias:
+   ```bash
+   npm install
+   ```
+2. Inicializa la base de datos SQLite:
+   ```bash
+   npm run init-db
+   ```
+3. Inicia el servidor:
+   ```bash
+   npm start
+   ```
+4. Abre `http://localhost:3000`.
+5. Haz clic en **Admin Login** para abrir el panel.
+
+### Credenciales por defecto
+- Usuario: `admin`
+- Contraseña: `admin123`
+
+> Recomendación: cambia el usuario/contraseña en la base de datos para producción.

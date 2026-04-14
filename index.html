@@ -4,24 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="seoTitle">Shiba Inu Premium | Cachorros de Padres Importados</title>
-    <meta
-      id="seoDescription"
-      name="description"
-      content="Cachorros Shiba Inu de línea premium, hijos de padres importados de Rusia, Alemania, Japón, España y Brasil."
-    />
+    <meta id="seoDescription" name="description" content="Cachorros Shiba Inu de línea premium, hijos de padres importados de Rusia, Alemania, Japón, España y Brasil." />
     <meta id="seoKeywords" name="keywords" content="Shiba Inu, cachorros Shiba Inu, Shiba Inu premium, padres importados" />
     <meta id="seoOgTitle" property="og:title" content="Shiba Inu Premium | Cachorros de Padres Importados" />
-    <meta
-      id="seoOgDescription"
-      property="og:description"
-      content="Cachorros Shiba Inu de línea premium con pedigree internacional."
-    />
+    <meta id="seoOgDescription" property="og:description" content="Cachorros Shiba Inu de línea premium con pedigree internacional." />
     <meta id="seoOgImage" property="og:image" content="https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&w=1500&q=80" />
     <meta property="og:type" content="website" />
     <link id="seoCanonical" rel="canonical" href="https://tusitio.com/shiba-inu" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <button id="openLogin" class="admin-login-trigger" type="button">Admin Login</button>
+
+    <div id="adminLoginModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <h3>Acceso Administrador</h3>
+        <p>Ingresa para editar visualmente la landing.</p>
+        <form id="loginForm" class="login-form">
+          <label>Usuario
+            <input id="loginUser" type="text" placeholder="admin" required />
+          </label>
+          <label>Contraseña
+            <input id="loginPassword" type="password" placeholder="••••••••" required />
+          </label>
+          <button class="btn" type="submit">Entrar al panel</button>
+          <p id="loginMessage" class="login-message"></p>
+        </form>
+      </div>
+    </div>
+
     <header class="hero" id="hero" style="--hero-bg-image: url('https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&w=1500&q=80')">
       <nav class="nav container">
         <div class="logo" data-edit-text="brandLogo">SHIBA INU PREMIUM</div>
@@ -31,10 +42,7 @@
       <section class="hero-content container">
         <p class="badge" data-edit-text="heroBadge">Camadas exclusivas</p>
         <h1 data-edit-text="heroTitle">Cachorros Shiba Inu de <span>linaje internacional</span></h1>
-        <p data-edit-text="heroDescription">
-          Descubre una crianza responsable con cachorros provenientes de padres importados de
-          <strong>Rusia, Alemania, Japón, España y Brasil</strong>.
-        </p>
+        <p data-edit-text="heroDescription">Descubre una crianza responsable con cachorros provenientes de padres importados de <strong>Rusia, Alemania, Japón, España y Brasil</strong>.</p>
         <div class="hero-actions">
           <a class="btn" href="#camadas" data-edit-text="heroPrimaryCta">Ver cachorros disponibles</a>
           <a class="btn btn-outline" href="#linaje" data-edit-text="heroSecondaryCta">Conocer el linaje</a>
@@ -45,10 +53,7 @@
     <main>
       <section id="linaje" class="section container">
         <h2 data-edit-text="lineageTitle">Un pedigree que marca la diferencia</h2>
-        <p data-edit-text="lineageDescription">
-          Seleccionamos cuidadosamente cada cruce para preservar la tipicidad de la raza,
-          temperamento equilibrado y excelente estructura.
-        </p>
+        <p data-edit-text="lineageDescription">Seleccionamos cuidadosamente cada cruce para preservar la tipicidad de la raza, temperamento equilibrado y excelente estructura.</p>
 
         <div class="cards">
           <article class="card">
@@ -101,136 +106,41 @@
 
       <section id="contacto" class="section container">
         <h2 data-edit-text="contactTitle">Agenda una videollamada y conoce la camada</h2>
-        <p data-edit-text="contactDescription">
-          Te mostramos a los cachorros en tiempo real, documentos de los padres y resolvemos
-          cualquier duda sobre el proceso de reserva.
-        </p>
+        <p data-edit-text="contactDescription">Te mostramos a los cachorros en tiempo real, documentos de los padres y resolvemos cualquier duda sobre el proceso de reserva.</p>
         <form class="contact-form">
-          <label>
-            Nombre completo
-            <input type="text" placeholder="Tu nombre" />
-          </label>
-          <label>
-            WhatsApp
-            <input type="tel" placeholder="+1 555 000 000" />
-          </label>
-          <label>
-            Ciudad
-            <input type="text" placeholder="¿Dónde vives?" />
-          </label>
-          <label>
-            Mensaje
-            <textarea rows="4" placeholder="Cuéntanos qué tipo de cachorro buscas"></textarea>
-          </label>
+          <label>Nombre completo<input type="text" placeholder="Tu nombre" /></label>
+          <label>WhatsApp<input type="tel" placeholder="+1 555 000 000" /></label>
+          <label>Ciudad<input type="text" placeholder="¿Dónde vives?" /></label>
+          <label>Mensaje<textarea rows="4" placeholder="Cuéntanos qué tipo de cachorro buscas"></textarea></label>
           <button type="submit" class="btn" data-edit-text="formButton">Enviar solicitud</button>
         </form>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p data-edit-text="footerText">© 2026 Shiba Inu Premium · Crianza ética y responsable.</p>
-      </div>
-    </footer>
+    <footer class="footer"><div class="container"><p data-edit-text="footerText">© 2026 Shiba Inu Premium · Crianza ética y responsable.</p></div></footer>
 
-    <a id="whatsappFloatingButton" class="whatsapp-float" href="https://wa.me/15550000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20cachorros%20Shiba%20Inu" target="_blank" rel="noopener noreferrer">
-      <span class="whatsapp-icon">💬</span>
-      <span id="whatsappFloatingText">WhatsApp</span>
-    </a>
+    <a id="whatsappFloatingButton" class="whatsapp-float" href="https://wa.me/15550000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20cachorros%20Shiba%20Inu" target="_blank" rel="noopener noreferrer"><span class="whatsapp-icon">💬</span><span id="whatsappFloatingText">WhatsApp</span></a>
 
-    <aside class="admin-panel" id="adminPanel">
+    <aside class="admin-panel hidden" id="adminPanel">
       <div class="admin-header">
         <h3>Panel Administrador</h3>
-        <button id="togglePanel" class="btn btn-small" type="button">Ocultar</button>
+        <div class="admin-tools">
+          <button id="logoutAdmin" class="btn btn-small btn-outline" type="button">Salir</button>
+          <button id="togglePanel" class="btn btn-small" type="button">Ocultar</button>
+        </div>
       </div>
 
-      <div class="admin-section">
-        <h4>Textos principales</h4>
-        <label>Título principal
-          <textarea data-admin-text="heroTitle" rows="2"></textarea>
-        </label>
-        <label>Descripción principal
-          <textarea data-admin-text="heroDescription" rows="3"></textarea>
-        </label>
-        <label>Título linaje
-          <input data-admin-text="lineageTitle" type="text" />
-        </label>
-        <label>Texto footer
-          <input data-admin-text="footerText" type="text" />
-        </label>
-      </div>
+      <div class="admin-section"><h4>Textos principales</h4><label>Título principal<textarea data-admin-text="heroTitle" rows="2"></textarea></label><label>Descripción principal<textarea data-admin-text="heroDescription" rows="3"></textarea></label><label>Título linaje<input data-admin-text="lineageTitle" type="text" /></label><label>Texto footer<input data-admin-text="footerText" type="text" /></label></div>
 
-      <div class="admin-section">
-        <h4>Imágenes</h4>
-        <label>Imagen hero (URL)
-          <input data-admin-image="heroBackgroundImage" type="url" />
-        </label>
-        <label>Imagen Rusia (URL)
-          <input data-admin-image="countryRussiaImage" type="url" />
-        </label>
-        <label>Imagen Alemania (URL)
-          <input data-admin-image="countryGermanyImage" type="url" />
-        </label>
-        <label>Imagen Japón (URL)
-          <input data-admin-image="countryJapanImage" type="url" />
-        </label>
-        <label>Imagen España (URL)
-          <input data-admin-image="countrySpainImage" type="url" />
-        </label>
-        <label>Imagen Brasil (URL)
-          <input data-admin-image="countryBrazilImage" type="url" />
-        </label>
-      </div>
+      <div class="admin-section"><h4>Imágenes</h4><label>Imagen hero (URL)<input data-admin-image="heroBackgroundImage" type="url" /></label><label>Imagen Rusia (URL)<input data-admin-image="countryRussiaImage" type="url" /></label><label>Imagen Alemania (URL)<input data-admin-image="countryGermanyImage" type="url" /></label><label>Imagen Japón (URL)<input data-admin-image="countryJapanImage" type="url" /></label><label>Imagen España (URL)<input data-admin-image="countrySpainImage" type="url" /></label><label>Imagen Brasil (URL)<input data-admin-image="countryBrazilImage" type="url" /></label></div>
 
-      <div class="admin-section">
-        <h4>Colores</h4>
-        <label>Color principal
-          <input data-admin-color="--primary" type="color" value="#cb4f26" />
-        </label>
-        <label>Color principal oscuro
-          <input data-admin-color="--primary-dark" type="color" value="#9a3918" />
-        </label>
-        <label>Fondo general
-          <input data-admin-color="--bg" type="color" value="#fff8f3" />
-        </label>
-      </div>
+      <div class="admin-section"><h4>Colores</h4><label>Color principal<input data-admin-color="--primary" type="color" value="#cb4f26" /></label><label>Color principal oscuro<input data-admin-color="--primary-dark" type="color" value="#9a3918" /></label><label>Fondo general<input data-admin-color="--bg" type="color" value="#fff8f3" /></label></div>
 
-      <div class="admin-section">
-        <h4>WhatsApp</h4>
-        <label>Número (formato internacional)
-          <input data-admin-whatsapp="number" type="text" placeholder="15551234567" />
-        </label>
-        <label>Mensaje automático
-          <textarea data-admin-whatsapp="message" rows="2"></textarea>
-        </label>
-        <label>Texto del botón
-          <input data-admin-whatsapp="buttonText" type="text" />
-        </label>
-      </div>
+      <div class="admin-section"><h4>WhatsApp</h4><label>Número (formato internacional)<input data-admin-whatsapp="number" type="text" placeholder="15551234567" /></label><label>Mensaje automático<textarea data-admin-whatsapp="message" rows="2"></textarea></label><label>Texto del botón<input data-admin-whatsapp="buttonText" type="text" /></label></div>
 
-      <div class="admin-section">
-        <h4>SEO</h4>
-        <label>SEO Title
-          <input data-admin-seo="title" type="text" />
-        </label>
-        <label>Meta Description
-          <textarea data-admin-seo="description" rows="3"></textarea>
-        </label>
-        <label>Keywords (separadas por coma)
-          <input data-admin-seo="keywords" type="text" />
-        </label>
-        <label>URL imagen social (OG Image)
-          <input data-admin-seo="ogImage" type="url" />
-        </label>
-        <label>Canonical URL
-          <input data-admin-seo="canonical" type="url" />
-        </label>
-      </div>
+      <div class="admin-section"><h4>SEO</h4><label>SEO Title<input data-admin-seo="title" type="text" /></label><label>Meta Description<textarea data-admin-seo="description" rows="3"></textarea></label><label>Keywords (separadas por coma)<input data-admin-seo="keywords" type="text" /></label><label>URL imagen social (OG Image)<input data-admin-seo="ogImage" type="url" /></label><label>Canonical URL<input data-admin-seo="canonical" type="url" /></label></div>
 
-      <div class="admin-actions">
-        <button id="resetConfig" class="btn btn-small btn-outline" type="button">Restablecer</button>
-        <button id="downloadConfig" class="btn btn-small" type="button">Descargar configuración</button>
-      </div>
+      <div class="admin-actions"><button id="resetConfig" class="btn btn-small btn-outline" type="button">Restablecer</button><button id="downloadConfig" class="btn btn-small" type="button">Descargar configuración</button></div>
       <p class="admin-note">Los cambios se guardan automáticamente en este navegador.</p>
     </aside>
 
