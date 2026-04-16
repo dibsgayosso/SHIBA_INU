@@ -26,6 +26,7 @@ Landing page de venta de cachorros Shiba Inu con panel administrador visual, log
    ```
 4. Abre `http://localhost:3000` para ver el preview.
 5. Dentro del iframe (landing), haz clic en **Admin Login** para editar.
+6. En el panel puedes cambiar textos/colores y también subir imágenes desde tu computadora o por URL.
 
 ### Credenciales por defecto
 - Usuario: `admin`

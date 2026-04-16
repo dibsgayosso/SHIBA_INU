@@ -103,6 +103,10 @@ const syncAdminInputs = () => {
     field.value = config.images[key] || target?.src || defaultConfig.images[key] || '';
   });
 
+  document.querySelectorAll('[data-admin-image-file]').forEach((field) => {
+    field.value = '';
+  });
+
   document.querySelectorAll('[data-admin-color]').forEach((field) => {
     field.value = config.colors[field.dataset.adminColor] || defaultConfig.colors[field.dataset.adminColor];
   });
@@ -138,6 +142,27 @@ const setupAdminPanel = () => {
       config.images[key] = event.target.value.trim();
       applyImages();
       saveConfig();
+    });
+  });
+
+  document.querySelectorAll('[data-admin-image-file]').forEach((field) => {
+    field.addEventListener('change', (event) => {
+      const key = event.target.dataset.adminImageFile;
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result !== 'string') return;
+        config.images[key] = reader.result;
+
+        const urlInput = document.querySelector(`[data-admin-image="${key}"]`);
+        if (urlInput) urlInput.value = reader.result;
+
+        applyImages();
+        saveConfig();
+      };
+      reader.readAsDataURL(file);
     });
   });
 

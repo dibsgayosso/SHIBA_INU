@@ -132,7 +132,52 @@
 
       <div class="admin-section"><h4>Textos principales</h4><label>Título principal<textarea data-admin-text="heroTitle" rows="2"></textarea></label><label>Descripción principal<textarea data-admin-text="heroDescription" rows="3"></textarea></label><label>Título linaje<input data-admin-text="lineageTitle" type="text" /></label><label>Texto footer<input data-admin-text="footerText" type="text" /></label></div>
 
-      <div class="admin-section"><h4>Imágenes</h4><label>Imagen hero (URL)<input data-admin-image="heroBackgroundImage" type="url" /></label><label>Imagen Rusia (URL)<input data-admin-image="countryRussiaImage" type="url" /></label><label>Imagen Alemania (URL)<input data-admin-image="countryGermanyImage" type="url" /></label><label>Imagen Japón (URL)<input data-admin-image="countryJapanImage" type="url" /></label><label>Imagen España (URL)<input data-admin-image="countrySpainImage" type="url" /></label><label>Imagen Brasil (URL)<input data-admin-image="countryBrazilImage" type="url" /></label></div>
+      <div class="admin-section">
+        <h4>Imágenes</h4>
+        <p class="admin-hint">Puedes pegar una URL o subir una imagen desde tu computadora.</p>
+
+        <label>Imagen hero (URL)
+          <input data-admin-image="heroBackgroundImage" type="url" />
+        </label>
+        <label>Subir imagen hero
+          <input data-admin-image-file="heroBackgroundImage" type="file" accept="image/*" />
+        </label>
+
+        <label>Imagen Rusia (URL)
+          <input data-admin-image="countryRussiaImage" type="url" />
+        </label>
+        <label>Subir imagen Rusia
+          <input data-admin-image-file="countryRussiaImage" type="file" accept="image/*" />
+        </label>
+
+        <label>Imagen Alemania (URL)
+          <input data-admin-image="countryGermanyImage" type="url" />
+        </label>
+        <label>Subir imagen Alemania
+          <input data-admin-image-file="countryGermanyImage" type="file" accept="image/*" />
+        </label>
+
+        <label>Imagen Japón (URL)
+          <input data-admin-image="countryJapanImage" type="url" />
+        </label>
+        <label>Subir imagen Japón
+          <input data-admin-image-file="countryJapanImage" type="file" accept="image/*" />
+        </label>
+
+        <label>Imagen España (URL)
+          <input data-admin-image="countrySpainImage" type="url" />
+        </label>
+        <label>Subir imagen España
+          <input data-admin-image-file="countrySpainImage" type="file" accept="image/*" />
+        </label>
+
+        <label>Imagen Brasil (URL)
+          <input data-admin-image="countryBrazilImage" type="url" />
+        </label>
+        <label>Subir imagen Brasil
+          <input data-admin-image-file="countryBrazilImage" type="file" accept="image/*" />
+        </label>
+      </div>
 
       <div class="admin-section"><h4>Colores</h4><label>Color principal<input data-admin-color="--primary" type="color" value="#cb4f26" /></label><label>Color principal oscuro<input data-admin-color="--primary-dark" type="color" value="#9a3918" /></label><label>Fondo general<input data-admin-color="--bg" type="color" value="#fff8f3" /></label></div>
 
