@@ -225,8 +225,14 @@ const checkSession = async () => {
   const token = getAuthToken();
   if (!token) return false;
 
-  const response = await fetch('/api/session', { headers: { Authorization: `Bearer ${token}` } });
-  return response.ok;
+  if (token === 'local-admin') return true;
+
+  try {
+    const response = await fetch('/api/session', { headers: { Authorization: `Bearer ${token}` } });
+    return response.ok;
+  } catch {
+    return false;
+  }
 };
 
 const setupAuth = () => {
@@ -245,27 +251,45 @@ const setupAuth = () => {
     const username = document.getElementById('loginUser').value;
     const password = document.getElementById('loginPassword').value;
 
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
 
-    const data = await response.json();
-    if (!response.ok) {
-      loginMessage.textContent = data.message || 'No fue posible iniciar sesión.';
+      const data = await response.json();
+      if (!response.ok) {
+        loginMessage.textContent = data.message || 'No fue posible iniciar sesión.';
+        return;
+      }
+
+      setAuthToken(data.token);
+      closeModal();
+      setAdminVisible(true);
       return;
-    }
+    } catch {
+      // Modo local de contingencia: útil cuando el sitio está en cPanel sin Node/API.
+      if (username === 'admin' && password === 'admin123') {
+        setAuthToken('local-admin');
+        closeModal();
+        setAdminVisible(true);
+        loginMessage.textContent = '';
+        return;
+      }
 
-    setAuthToken(data.token);
-    closeModal();
-    setAdminVisible(true);
+      loginMessage.textContent = 'No hay conexión con la API. Verifica credenciales o activa Node.js.';
+    }
   });
 
   document.getElementById('logoutAdmin').addEventListener('click', async () => {
     const token = getAuthToken();
-    if (token) {
-      await fetch('/api/logout', { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+    if (token && token !== 'local-admin') {
+      try {
+        await fetch('/api/logout', { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+      } catch {
+        // Ignorar error de red en logout.
+      }
     }
     clearAuthToken();
     setAdminVisible(false);

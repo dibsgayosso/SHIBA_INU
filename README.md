@@ -33,3 +33,7 @@ Landing page de venta de cachorros Shiba Inu con panel administrador visual, log
 - Contraseña: `admin123`
 
 > Recomendación: cambia el usuario/contraseña en la base de datos para producción.
+
+## Si no tienes Node.js
+- El login puede funcionar en **modo local de contingencia** con `admin / admin123` para desbloquear el panel en el navegador.
+- En ese modo no se usa API ni base de datos; la edición se guarda en `localStorage`.
