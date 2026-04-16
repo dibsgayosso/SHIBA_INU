@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const DB_PATH = path.join(__dirname, 'db', 'admin.sqlite');
 const INIT_SQL = path.join(__dirname, 'db', 'init.sql');
 const SESSION_TTL_MS = 1000 * 60 * 60 * 8;
+const CONFIG_PATH = path.join(__dirname, 'db', 'site-config.json');
 const sessions = new Map();
 
 const hashPassword = (password) => crypto.createHash('sha256').update(password).digest('hex');
@@ -26,6 +27,30 @@ if (process.argv.includes('--init-db')) {
 }
 
 const db = ensureDb();
+
+const readConfig = () => {
+  try {
+    return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+  } catch {
+    return null;
+  }
+};
+
+const writeConfig = (config) => {
+  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2), 'utf8');
+};
+
+const getSessionFromRequest = (req) => {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  if (!token) return null;
+  const session = sessions.get(token);
+  if (!session || session.expiresAt < Date.now()) {
+    sessions.delete(token);
+    return null;
+  }
+  return { token, session };
+};
+
 const app = express();
 
 app.use(express.json());
@@ -70,6 +95,25 @@ app.get('/api/session', (req, res) => {
 app.post('/api/logout', (req, res) => {
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (token) sessions.delete(token);
+  return res.json({ ok: true });
+});
+
+
+app.get('/api/config', (_req, res) => {
+  return res.json({ ok: true, config: readConfig() });
+});
+
+app.post('/api/config', (req, res) => {
+  const active = getSessionFromRequest(req);
+  if (!active) {
+    return res.status(401).json({ ok: false, message: 'Sesión inválida.' });
+  }
+
+  if (!req.body || typeof req.body !== 'object') {
+    return res.status(400).json({ ok: false, message: 'Config inválida.' });
+  }
+
+  writeConfig(req.body);
   return res.json({ ok: true });
 });
 

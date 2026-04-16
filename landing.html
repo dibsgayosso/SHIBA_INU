@@ -99,35 +99,35 @@
             <p class="small" data-edit-text="priceLabel">Desde</p>
             <p class="price" data-edit-text="priceValue">USD 2,000</p>
             <p class="small" data-edit-text="priceFootnote">(según sexo, color y linaje)</p>
-            <a class="btn" href="#contacto" data-edit-text="priceCta">Solicitar información</a>
+            <a class="btn" href="#estandar-raza" data-edit-text="priceCta">Solicitar información</a>
           </aside>
         </div>
       </section>
 
       <section class="section champion-section">
         <div class="container champion-box">
-          <h2>🏆 Tenemos al Shiba Inu Campeón Mexicano</h2>
+          <h2 data-edit-text="championTitle">🏆 Tenemos al Shiba Inu Campeón Mexicano</h2>
           <p>
-            Nuestro criadero cuenta con ejemplares reconocidos en pista nacional, incluyendo
+            <span data-edit-text="championDescription">Nuestro criadero cuenta con ejemplares reconocidos en pista nacional, incluyendo
             linajes con títulos de <strong>Campeón Mexicano</strong> que destacan por estructura,
-            temperamento y tipicidad de raza.
+            temperamento y tipicidad de raza.</span>
           </p>
         </div>
       </section>
 
       <section class="section section-highlight" id="entregas-mexico">
         <div class="container">
-          <h2>Mapa de entregas en la República Mexicana</h2>
-          <p>
+          <h2 data-edit-text="mxMapTitle">Mapa de entregas en la República Mexicana</h2>
+          <p data-edit-text="mxMapDescription">
             Pasa el cursor por cada estado y verás una cabecita de Shiba Inu en los lugares donde
             ya hemos entregado cachorros.
           </p>
+
           <div class="mx-map-box">
-            <img
-              class="mx-map-image"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Mexico_location_map.svg"
-              alt="Mapa de México"
-            />
+            <svg class="mx-map-image" viewBox="0 0 700 420" role="img" aria-label="Mapa estilizado de México">
+              <path d="M52 188l48-34 44 18 37-26 66 22 29-14 42 11 30-20 28 10 32-12 34 20 22-10 30 24 39-6 18 24-21 19-37 8-22 28-28 10-42-14-37 10-40-6-30-16-38 10-30-16-42 9-32-24-40-7z" fill="#f4ddd1" stroke="#a85a3d" stroke-width="6" stroke-linejoin="round"/>
+            </svg>
+
             <div class="state-cloud">
               <button class="state-tag delivered">Aguascalientes<span class="shiba-head">🐕</span></button>
               <button class="state-tag delivered">Baja California<span class="shiba-head">🐕</span></button>
@@ -163,22 +163,31 @@
               <button class="state-tag delivered">Zacatecas<span class="shiba-head">🐕</span></button>
             </div>
           </div>
-          <p class="map-note">Estados sin entrega por ahora: Baja California Sur, Tamaulipas, Tlaxcala y Nayarit.</p>
+          <p class="map-note" data-edit-text="mxMapNote">Estados sin entrega por ahora: Baja California Sur, Tamaulipas, Tlaxcala y Nayarit.</p>
         </div>
       </section>
 
-      <section id="contacto" class="section container">
-        <h2 data-edit-text="contactTitle">Agenda una videollamada y conoce la camada</h2>
-        <p data-edit-text="contactDescription">Te mostramos a los cachorros en tiempo real, documentos de los padres y resolvemos cualquier duda sobre el proceso de reserva.</p>
-        <form class="contact-form">
-          <label>Nombre completo<input type="text" placeholder="Tu nombre" /></label>
-          <label>WhatsApp<input type="tel" placeholder="+1 555 000 000" /></label>
-          <label>Ciudad<input type="text" placeholder="¿Dónde vives?" /></label>
-          <label>Mensaje<textarea rows="4" placeholder="Cuéntanos qué tipo de cachorro buscas"></textarea></label>
-          <button type="submit" class="btn" data-edit-text="formButton">Enviar solicitud</button>
-        </form>
+      <section class="section breed-standard-section" id="estandar-raza">
+        <div class="container breed-standard-grid">
+          <div class="silhouette-box">
+            <img class="silhouette-img" src="https://images.unsplash.com/photo-1583512603877-83d67e4e18d1?auto=format&fit=crop&w=900&q=80" alt="Silueta de Shiba Inu" />
+          </div>
+          <div>
+            <h2 data-edit-text="standardTitle">Estándar de la raza Shiba Inu</h2>
+            <p data-edit-text="standardIntro">Referencia: estándar oficial AKC del Shiba Inu (Official Standard of the Shiba Inu).</p>
+            <ul class="standard-list">
+              <li><strong>Altura machos:</strong> 14.5 a 16.5 in (36.8 a 41.9 cm), ideal al centro del rango.</li>
+              <li><strong>Altura hembras:</strong> 13.5 a 15.5 in (34.3 a 39.4 cm), ideal al centro del rango.</li>
+              <li><strong>Peso aproximado:</strong> 23 lb (10.4 kg) en machos y 17 lb (7.7 kg) en hembras.</li>
+              <li><strong>Proporción:</strong> relación altura/largo de 10:11 en machos (hembras ligeramente más largas).</li>
+              <li><strong>Estructura:</strong> cuerpo compacto, musculado, orejas triangulares y cola en hoz o enroscada sobre el lomo.</li>
+              <li><strong>Pelaje:</strong> doble capa (externa dura y recta; subcapa suave y densa).</li>
+              <li><strong>Temperamento:</strong> valentía vivaz, buen carácter, independencia y lealtad con la familia.</li>
+            </ul>
+          </div>
+        </div>
       </section>
-    </main>
+</main>
 
     <footer class="footer"><div class="container"><p data-edit-text="footerText">© 2026 Shiba Inu Premium · Crianza ética y responsable.</p></div></footer>
 
@@ -194,6 +203,8 @@
       </div>
 
       <div class="admin-section"><h4>Textos principales</h4><label>Título principal<textarea data-admin-text="heroTitle" rows="2"></textarea></label><label>Descripción principal<textarea data-admin-text="heroDescription" rows="3"></textarea></label><label>Título linaje<input data-admin-text="lineageTitle" type="text" /></label><label>Texto footer<input data-admin-text="footerText" type="text" /></label></div>
+
+      <div class="admin-section"><h4>Contenido extendido</h4><label>Título Campeón Mexicano<input data-admin-text="championTitle" type="text" /></label><label>Descripción Campeón<textarea data-admin-text="championDescription" rows="3"></textarea></label><label>Título mapa México<input data-admin-text="mxMapTitle" type="text" /></label><label>Descripción mapa<textarea data-admin-text="mxMapDescription" rows="3"></textarea></label><label>Nota mapa<input data-admin-text="mxMapNote" type="text" /></label><label>Título estándar<input data-admin-text="standardTitle" type="text" /></label><label>Introducción estándar<textarea data-admin-text="standardIntro" rows="3"></textarea></label></div>
 
       <div class="admin-section">
         <h4>Imágenes</h4>

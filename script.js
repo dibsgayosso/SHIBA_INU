@@ -42,10 +42,44 @@ const mergeConfig = (stored) => ({
 
 let config = mergeConfig(safeParse(localStorage.getItem(STORAGE_KEY)));
 
-const saveConfig = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+const saveConfigLocal = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
 const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_KEY) || '';
 const setAuthToken = (token) => localStorage.setItem(AUTH_TOKEN_KEY, token);
 const clearAuthToken = () => localStorage.removeItem(AUTH_TOKEN_KEY);
+
+const loadRemoteConfig = async () => {
+  try {
+    const response = await fetch('/api/config');
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data?.config || null;
+  } catch {
+    return null;
+  }
+};
+
+const saveConfigRemote = async () => {
+  const token = getAuthToken();
+  if (!token || token === 'local-admin') return;
+
+  try {
+    await fetch('/api/config', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(config),
+    });
+  } catch {
+    // Fallback local cuando no hay API
+  }
+};
+
+const saveConfig = () => {
+  saveConfigLocal();
+  saveConfigRemote();
+};
 
 const applyTexts = () => {
   document.querySelectorAll('[data-edit-text]').forEach((node) => {
@@ -200,6 +234,7 @@ const setupAdminPanel = () => {
     applyWhatsApp();
     applySeo();
     syncAdminInputs();
+    saveConfigLocal();
   });
 
   document.getElementById('downloadConfig').addEventListener('click', () => {
@@ -297,6 +332,12 @@ const setupAuth = () => {
 };
 
 const boot = async () => {
+  const remoteConfig = await loadRemoteConfig();
+  if (remoteConfig) {
+    config = mergeConfig(remoteConfig);
+    saveConfigLocal();
+  }
+
   applyTexts();
   applyImages();
   applyColors();

@@ -42,4 +42,7 @@ Landing page de venta de cachorros Shiba Inu con panel administrador visual, log
 ## Personalizaciones incluidas
 - Se eliminó la barra de preview para entrar directo a la landing.
 - Se agregó sección de **Shiba Inu Campeón Mexicano**.
-- Se agregó sección de entregas en México con mapa y estados interactivos (excepto Baja California Sur, Tamaulipas, Tlaxcala y Nayarit).
+- Se agregó sección de entregas en México con mapa estilizado y estados interactivos (excepto Baja California Sur, Tamaulipas, Tlaxcala y Nayarit).
+- Se reemplazó el formulario final por sección de **estándar de raza Shiba Inu** con silueta y medidas oficiales.
+
+- Cuando hay API activa, la configuración también se guarda en `db/site-config.json` para persistir cambios en servidor.
