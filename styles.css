@@ -349,3 +349,71 @@ input[type='file'] {
   background: #fff;
   padding: 0.55rem;
 }
+
+.champion-section {
+  background: #fff4ee;
+}
+
+.champion-box {
+  background: #fff;
+  border-left: 6px solid var(--primary);
+  border-radius: 0.9rem;
+  padding: 1.2rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+}
+
+.mx-map-box {
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+}
+
+.mx-map-image {
+  width: min(520px, 100%);
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.state-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.state-tag {
+  border: 1px solid #d9ccc6;
+  background: #fffaf7;
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.86rem;
+  position: relative;
+}
+
+.state-tag.delivered {
+  cursor: pointer;
+}
+
+.shiba-head {
+  opacity: 0;
+  transform: translateY(5px) scale(0.8);
+  transition: 0.22s ease;
+  margin-left: 0.25rem;
+  display: inline-block;
+}
+
+.state-tag.delivered:hover .shiba-head {
+  opacity: 1;
+  transform: translateY(0) scale(1.06);
+}
+
+.state-tag.not-delivered {
+  background: #efefef;
+  color: #8a8a8a;
+}
+
+.map-note {
+  margin-top: 0.85rem;
+  color: var(--muted);
+}

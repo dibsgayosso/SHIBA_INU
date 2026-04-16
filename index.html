@@ -1,48 +1,15 @@
 <!doctype html>
-<html lang="es" class="no-js">
+<html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-    <title>Shiba Inu Premium | Vista previa</title>
-    <meta name="robots" content="noindex, nofollow" />
-    <meta
-      name="description"
-      content="Vista previa fullscreen de la landing Shiba Inu Premium con estilo tipo marketplace."
-    />
-    <link rel="stylesheet" href="preview.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shiba Inu Premium</title>
+    <meta http-equiv="refresh" content="0; url=landing.html" />
     <script>
-      const calcHeight = () => {
-        const header = document.querySelector('.preview__header');
-        const frame = document.querySelector('.full-screen-preview__frame');
-        if (!header || !frame) return;
-        frame.style.height = `${window.innerHeight - header.offsetHeight}px`;
-      };
-      window.addEventListener('load', calcHeight);
-      window.addEventListener('resize', calcHeight);
+      window.location.replace('landing.html');
     </script>
   </head>
-
-  <body class="full-screen-preview">
-    <header class="preview__header">
-      <div class="preview__brand">
-        <a class="header-brand" href="landing.html">SHIBA INU PREMIUM</a>
-      </div>
-
-      <div class="preview__actions">
-        <a class="btn btn-secondary" href="landing.html" target="preview-frame">Ver Landing</a>
-        <a class="btn btn-primary" href="https://wa.me/15550000000" target="_blank" rel="noopener noreferrer">Reservar ahora</a>
-      </div>
-    </header>
-
-    <iframe
-      class="full-screen-preview__frame"
-      src="landing.html"
-      name="preview-frame"
-      frameborder="0"
-      noresize="noresize"
-      allow="geolocation 'self'; autoplay 'self'"
-      title="Vista previa landing Shiba Inu"
-    ></iframe>
+  <body>
+    <p>Redirigiendo a la landing...</p>
   </body>
 </html>
